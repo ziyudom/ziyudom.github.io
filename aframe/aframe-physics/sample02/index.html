@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>aframe-physics</title>
+    <script src="../aframe.min.js"></script>
+    <script src="./aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <a-scene physics="debug: true;">
+
+        <!-- entityで書いてもいいし、a-box a-cylinderの形式でもOK -->
+        <a-entity dynamic-body geometry="primitive: sphere" position=" 0 4 -10" ></a-entity>
+        <a-entity dynamic-body geometry="primitive: box" position=" 2 4 -10" ></a-entity>
+        <a-cylinder dynamic-body position=" 1 10 -10" ></a-cylinder>
+
+        <!-- ひとつ浮かせてアニメーションを付けてみる -->
+        <a-cylinder static-body position=" 1 2 -10" >
+            <a-animation attribute="rotation"
+                           dur="10000"
+                           fill="forwards"
+                           Easing="linear"
+                           to="0 0 360"
+                           repeat="indefinite"></a-animation>
+        </a-cylinder>
+
+        <!-- ステージ、sky -->
+        <a-entity static-body geometry="primitive: box; width: 300; depth: 300; height: 1" position="0 0 0" ></a-entity>
+        <a-sky color="blue"></a-sky>
+    </a-scene>
+  </body>
+</html>
