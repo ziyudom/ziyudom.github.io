@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>aframe-physics</title>
+    <script src="../aframe.min.js"></script>
+    <script src="./aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <a-scene physics="debug: true;">
+        <a-entity dynamic-body geometry="primitive: sphere" position=" 0 4 -10" ></a-entity>
+        <a-entity static-body geometry="primitive: box; width: 300; depth: 300; height: 1" position="0 0 0" ></a-entity>
+        <a-sky color="blue"></a-sky>
+    </a-scene>
+  </body>
+</html>
