@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="model-viewer.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <title>スザンヌさんだよ</title>
+    <style media="screen">
+        model-viewer{
+            width: 100%;
+            height: 80vh;
+        }
+    </style>
 </head>
 <body>
     <h1 style="text-align:center;">スザンヌさんだよ</h1>
-    <model-viewer auto-rotate background-color="#000" controls src="hoge.glb"></model-viewer>
+<model-viewer id="toggle-color" src="assets/hoge.glb" controls auto-rotate>
+</model-viewer>
+<script>
+    const colors = ['#4885ed', '#3cba54', '#f4c20d', '#db3236'];
+    let i = 0;
+    setInterval(() =>
+        $('#toggle-color').attr('background-color', colors[i++ % 4]), 2000);
+</script>
 </body>
 </html>
