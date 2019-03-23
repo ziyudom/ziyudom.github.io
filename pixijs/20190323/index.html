@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="js/main.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Heebo:900" rel="stylesheet">
+    <title>hoge</title>
+    <style>
+    nav,
+    .point {
+        display: none;
+    }
+    .title {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: black;
+        padding: 10px;
+        z-index: 1;
+        font-size: 10px;
+    }
+    .title a{
+        color :white;
+        text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+    <p class="title">
+        <a target="_blank" href="https://ziyudom.com/">
+            ziyudom.com
+        </a>
+    </p>
+    <div class="point">
+        <div class="rotate">
+            回転
+            <input type="checkbox" name="" id="chkRotation" checked>
+        </div>
+        <div class="rtn">
+            <div class="point01">
+                <p>rtnPoint01</p>
+                <p>x <span class="x_val"></span></p>
+                 <input class="x" type="range" value="-100" min="-100">
+                <p>y <span class="y_val"></span></p>
+                 <input class="y" type="range" value="0" min="-100">
+                <p>z <span class="z_val"></span></p>
+                 <input class="z" type="range" value="0" min="-100">
+            </div>
+            <div class="point02">
+                <p>rtnPoint02</p>
+                <p>x <span class="x_val"></span></p>
+                 <input class="x" type="range" value="0" min="-100">
+                <p>y <span class="y_val"></span></p>
+                 <input class="y" type="range" value="100" min="-100">
+                <p>z <span class="z_val"></span></p>
+                 <input class="z" type="range" value="0" min="-100">
+            </div>
+            <div class="point03">
+                <p>rtnPoint03</p>
+                <p>x <span class="x_val"></span></p>
+                 <input class="x" type="range" value="100" min="-100">
+                <p>y <span class="y_val"></span></p>
+                 <input class="y" type="range" value="0" min="-100">
+                <p>z <span class="z_val"></span></p>
+                 <input class="z" type="range" value="0" min="-100">
+            </div>
+        </div>
+    </div>
+    <nav class="">
+        <p class="arrowLeft" data-arrow="left">左</p>
+        <p class="arrowRight" data-arrow="right">右</p>
+    </nav>
+    <div class="stage"></div>
+</body>
+</html>
