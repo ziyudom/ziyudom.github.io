@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="js/main.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+
+        uniform mat4 modelViewMatrix;
+        uniform mat4 modelMatrix;
+        uniform mat4 projectionMatrix;
+        uniform float time;
+        uniform vec3 cameraPosition;
+        uniform float numChars;
+
+        attribute vec3 position;
+        attribute vec3 randomValues;
+        attribute vec2 uv;
+        attribute float charIndex;
+
+        varying vec4 vColor;
+        varying vec2 vUv;
+
+        const float PI = 3.1415926535897932384626433832795;
+
+        const float radius = 1000.0;
+
+        float random (vec2 st) {
+            return fract(sin(dot(st.xy, vec2(12.9898,78.233)))* 43758.5453123);
+        }
+
+        vec3 rotateVec3(vec3 p, float angle, vec3 axis){
+
+            vec3 a = normalize(axis);
+            float s = sin(angle);
+            float c = cos(angle);
+            float r = 1.0 - c;
+
+            mat3 m = mat3 (
+                a.x * a.x * r + c,
+                a.y * a.x * r + a.z * s,
+                a.z * a.x * r - a.y * s,
+                a.x * a.y * r - a.z * s,
+                a.y * a.y * r + c,
+                a.z * a.y * r + a.x * s,
+                a.x * a.z * r + a.y * s,
+                a.y * a.z * r - a.x * s,
+                a.z * a.z * r + c
+            );
+
+            return m * p;
+
+        }
+
+        // 範囲を設定し直す
+        float map(float value, float inputMin, float inputMax, float outputMin, float outputMax, bool clamp) {
+          if(clamp == true) {
+            if(value < inputMin) return outputMin;
+            if(value > inputMax) return outputMax;
+          }
+
+          float p = (outputMax - outputMin) / (inputMax - inputMin);
+          return ((value - inputMin) * p) + outputMin;
+        }
+
+        // time, scale, offsetを使って角度を返す
+        // 範囲は -PI ~ PI
+        float getRad(float scale, float offset) {
+          return map(mod(time * scale + offset, PI * 2.0), 0.0, PI * 2.0, -PI, PI, true);
+        }
+
+        void main() {
+
+            vec3 pos = position;
+            float theta;// = PI * 2.0 / numChars * 100.0 * charIndex;
+
+            pos.z += radius * random(vec2(randomValues.x));
+            theta = getRad(4.0, (randomValues.x) * 20.0);
+            pos = rotateVec3(pos, theta, vec3(0.0, 1.0, 0.0));
+            theta = getRad(4.0, (randomValues.y) * 20.0);
+            pos = rotateVec3(pos, theta, vec3(1.0, 0.0, 0.0));
+            theta = getRad(4.0, (randomValues.z) * 20.0);
+            pos = rotateVec3(pos, theta, vec3(0.0, 0.0, 1.0));
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+
+            // フラグメントシェーダに渡すUV座標を代入
+            vUv = vec2(
+                //(uv.x + mod(txtTextureIndex, numTextureGridCols)) * uUnit,
+                //(uv.y + floor(txtTextureIndex / numTextureGridCols)) * vUnit
+                uv.x,
+                uv.y
+            );
+
+            vColor = vec4(sin(randomValues.x), sin(randomValues.y), sin(randomValues.z), 1.0);
+
+        }
+
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+
+        precision mediump float;
+        uniform sampler2D txtTexture;
+        varying vec4 vColor;
+        varying vec2 vUv;
+
+        void main(){
+
+            //vec4 color = vec4(1.0,0.5,0.3,1.0);
+            //vec4 color = texture2D(txtTexture, vUv) * vColor;
+            vec4 color = texture2D(txtTexture, vUv);
+
+            if(color.a == 0.0) {
+                discard;
+            } else {
+                gl_FragColor = color;
+            }
+        }
+
+    </script>
+
+    <title>hoge</title>
+    <style>
+    body{
+        margin: 0;
+        overflow: hidden;
+    }
+    </style>
+</head>
+<body>
+    <div id="stage"></div>
+</body>
+</html>
