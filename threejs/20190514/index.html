@@ -24,7 +24,7 @@
 
         const float PI = 3.1415926535897932384626433832795;
 
-        const float radius = 1000.0;
+        const float radius = 300.0;
 
         float random (vec2 st) {
             return fract(sin(dot(st.xy, vec2(12.9898,78.233)))* 43758.5453123);
@@ -75,7 +75,7 @@
             vec3 pos = position;
             float theta;// = PI * 2.0 / numChars * 100.0 * charIndex;
 
-            pos.z += radius * random(vec2(randomValues.x));
+            pos.z += radius - (radius - 50.0) * random(vec2(randomValues.x));
             theta = getRad(4.0, (randomValues.x) * 20.0);
             pos = rotateVec3(pos, theta, vec3(0.0, 1.0, 0.0));
             theta = getRad(4.0, (randomValues.y) * 20.0);
@@ -108,8 +108,8 @@
         void main(){
 
             //vec4 color = vec4(1.0,0.5,0.3,1.0);
-            //vec4 color = texture2D(txtTexture, vUv) * vColor;
-            vec4 color = texture2D(txtTexture, vUv);
+            vec4 color = texture2D(txtTexture, vUv) * vColor;
+            //vec4 color = texture2D(txtTexture, vUv);
 
             if(color.a == 0.0) {
                 discard;
