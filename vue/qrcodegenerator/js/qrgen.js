@@ -6,6 +6,22 @@ new Vue({
         isEnter: false,
         //QRコードリスト
         qrlist: [
+            {
+                "title":"サンプルサイト",
+                "url":"https://example.com"
+            },
+            {
+                "title":"ほげサンプルサイト",
+                "url":"https://hoge.example.com"
+            },
+            {
+                "title":"ぴよサンプルサイト",
+                "url":"https://piyo.example.com"
+            },
+            {
+                "title":"ふがサンプルサイト",
+                "url":"https://huga.example.com"
+            }
         ],
         //2列表示
         isCol2: true

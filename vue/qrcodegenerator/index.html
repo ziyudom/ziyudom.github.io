@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="QRジェネレーターβ">
         <meta http-equiv="Cache-Control" content="no-chache">
-        <title>QRジェネレーターβ</title>
+        <title>QRリストジェネレーターβ ~βって書いておけばなんでもいいんでしたっけ~</title>
         <link rel="stylesheet" href="./css/pure-min.css">
         <link rel="stylesheet" href="./css/styles.css">
         <link rel="stylesheet" href="./css/qrgen.css">
@@ -20,8 +20,9 @@
             <div class="content">
                 <section class="uploadBlock block" @dragleave.prevent="fileDragLeave" @drop.prevent="fileDrop" @dragover.prevent @dragenter="fileDragEnter":class="{enter:isEnter} ">
                     <p class="title">▼CSVをアップロードして 【 URL,タイトル[任意] 】</p>
-                    <p>選択するか、ファイルをドラッグ&ドロップもできるかな。知らんけど。</p>
+                    <p>ファイルをドラッグ&amp;ドロップもできるかな。知らんけど。てか.txtでもよかったわ。</p>
                     <input type="file" accept="text/csv" @change="loadCsvFile" />
+                    <a class="c_pink" href="./csv/sample_import.csv" download>▼サンプルファイルダウンロード</a>
                 </section>
                 <p class="stsCol">
                     <label><input type="checkbox" v-model="isCol2">2列で表示</label>
