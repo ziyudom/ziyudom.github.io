@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="QRジェネレーターβ">
+        <meta http-equiv="Cache-Control" content="no-chache">
+        <title>QRジェネレーターβ</title>
+        <link rel="stylesheet" href="./css/pure-min.css">
+        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="./css/qrgen.css">
+    </head>
+    <body>
+    <div id="layout">
+        <div id="vue-directory" v-cloak>
+            <div class="header">
+                <h1>QRコードジェネレータ<span style="margin: 0 10px; font-size: .7em;">(β)</span></h1>
+                <h2>CSVアップしたらQRが生成されたらいいなぁって</h2>
+            </div>
+            <div class="content">
+                <section class="uploadBlock block" @dragleave.prevent="fileDragLeave" @drop.prevent="fileDrop" @dragover.prevent @dragenter="fileDragEnter":class="{enter:isEnter} ">
+                    <p class="title">▼CSVをアップロードして 【 URL,タイトル[任意] 】</p>
+                    <p>選択するか、ファイルをドラッグ&ドロップもできるかな。知らんけど。</p>
+                    <input type="file" accept="text/csv" @change="loadCsvFile" />
+                </section>
+                <p class="stsCol">
+                    <label><input type="checkbox" v-model="isCol2">2列で表示</label>
+                </p>
+                <div class="linesWrap" :class=" {col2: isCol2}">
+                    <section class="line pure-g" v-for="res in qrlist">
+                        <a v-bind:href="res.url" target="_blank" >
+                        <div class="textBlock pure-u-4-5">
+                            <p>{{ res.title }}</p>
+                            <p  class="c_pink">{{ res.url }}</p>
+                        </div>
+                        <div class="qrBlock pure-u-1-5"><p class="js-qr" v-bind:data-url="res.url" ></p></div>
+                        </a>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/lib/qrcode.min.js"></script>
+    <script src="./js/lib/vue.min.js"></script>
+    <script src="./js/qrgen.js"></script>
+    </body>
+</html>
